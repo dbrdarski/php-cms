@@ -36,22 +36,15 @@ $db = new \Core\Database\Connection(
 use \Core\Models\User;
 $user = new User;;
 
-echo '<pre>';
-var_dump($user::find(1)->email);
-echo '</pre>';
-
-die();
-
 $router
-    ->add('/', function($req, $res){
-        $res->json(json_encode([['dane', 'is_king'],['your', 'kiss_is', 'dream']]));
+    ->add('/', function($req, $res) use ($user){
+        $res->json(json_encode($user::find(1)));
         return $res;
     })
-    ->add('/about', function($req, $res){
-        $res->render('template', 
-            array(
-                'title' => 'Hello, World!', 
-                'text' => 'This is a <strong>text.</strong>'
+    ->add('/about', function($req, $res) use ($user){
+        $res->render('user', array(
+                'name' => $user::find(1)->name, 
+                'email' => $user::find(1)->email
             )
         );
         return $res;
