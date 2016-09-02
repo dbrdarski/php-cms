@@ -24,6 +24,10 @@ $db = new \Core\Database\Connection($config['db']);
 //     $table->string('title');
 // });
 use \Core\Models\User;
+use \Core\Controllers\UserController;
+
+$ctrl = new UserController;
+
 $user = new User;;
 
 $router
@@ -39,7 +43,7 @@ $router
         );
         return $res;
     })
-    ->get('/user/signup', 'UserController:getSignUp')
+    ->get('/user/signup', [$ctrl, 'getSignUp'])
     ->post('/user/signup', function($req, $res) use ($user){
         var_dump($req->params);
         return $res;

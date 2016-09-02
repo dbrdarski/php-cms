@@ -6,8 +6,8 @@ use Core\Models\User as User;
 
 class UserController
 {
-    function getSignUp($req, $res){
-        $res->render('signup', array(
+    public function getSignUp($req, $res){
+        return $res->render('signup', array(
                 'title' => 'Sign up',
                 'auth' => [
                     "signup" => $req->path
