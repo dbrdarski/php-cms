@@ -1,6 +1,7 @@
 <?php 
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../config/config.php';
 
 $router = new \Core\Router;
 
@@ -14,18 +15,7 @@ $render->inject( new Mustache_Engine(
     ))
 );
 
-$db = new \Core\Database\Connection(
-  array(
-    'driver'   => 'mysql',
-    'host' => 'localhost',
-    'database' => 'php-cms',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'   => ''
-  )
-);
+$db = new \Core\Database\Connection($config['db']);
 
 // $db->capsule;
 
@@ -60,7 +50,7 @@ $router
     })
     ->get('/user/add', function($req, $res) use ($user){
         $user::create([
-            'name' => 'Panche Brdarski',
+            'name' => 'Dane Brdarski',
             'email' => 'fallboy17@yahoo.com',
             'password' => '123'
         ]);
