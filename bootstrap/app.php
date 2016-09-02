@@ -37,11 +37,11 @@ use \Core\Models\User;
 $user = new User;;
 
 $router
-    ->add('/', function($req, $res) use ($user){
+    ->get('/', function($req, $res) use ($user){
         $res->json(json_encode($user::find(1)));
         return $res;
     })
-    ->add('/about', function($req, $res) use ($user){
+    ->get('/user', function($req, $res) use ($user){
         $res->render('user', array(
                 'name' => $user::find(1)->name, 
                 'email' => $user::find(1)->email
@@ -49,13 +49,33 @@ $router
         );
         return $res;
     })
-    ->add('/contact', function($req, $res){
+    ->get('/user/signup', new \Core\Controllers\UserController)
+    ->post('/user/signup', function($req, $res) use ($user){
+        var_dump($req->params);
+        return $res;
+    });
+    $router->get('/user/signup/2', function($req, $res) use ($user){
+        var_dump($req->params);
+        return $res;
+    })
+    ->get('/user/add', function($req, $res) use ($user){
+        $user::create([
+            'name' => 'Panche Brdarski',
+            'email' => 'fallboy17@yahoo.com',
+            'password' => '123'
+        ]);
+        return $res
+            ->type('text/html')
+            ->write('User created')
+        ;
+    })
+    ->get('/contact', function($req, $res){
         $res->write('te mrazam');
         return $res;
     })
-    ->add('/404', function($req, $res){
-        return
-        $res->status(404)
+    ->get('/404', function($req, $res){
+        return $res
+            ->status(404)
             ->type('text/html')
             ->write('Not Found.')
         ;
