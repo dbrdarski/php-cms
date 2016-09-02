@@ -6,7 +6,7 @@ use Core\Models\User as User;
 
 class UserController
 {
-    function __construct($req, $res){
+    function getSignUp($req, $res){
         $res->render('signup', array(
                 'title' => 'Sign up',
                 'auth' => [
@@ -15,5 +15,4 @@ class UserController
             )
         );        
     }
-
 }

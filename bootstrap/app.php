@@ -49,7 +49,7 @@ $router
         );
         return $res;
     })
-    ->get('/user/signup', new \Core\Controllers\UserController)
+    ->get('/user/signup', 'UserController:getSignUp')
     ->post('/user/signup', function($req, $res) use ($user){
         var_dump($req->params);
         return $res;
