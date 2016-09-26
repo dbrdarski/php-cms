@@ -6,7 +6,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Connection {
 
-    public function __construct($settings)
+    function __construct($settings)
     {
         $this->capsule = new Capsule;
 

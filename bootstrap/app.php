@@ -1,7 +1,53 @@
 <?php 
 
+$arr = [];
+$arr['bsd'] = '1';
+$arr['asd'] = 2;
+echo '<pre>';
+print_r($arr);
+echo '</pre>';
+
+$host = 'localhost';
+$db   = 'php-cms';
+$user = 'root';
+$pass = 'root';
+$charset = 'utf8';
+
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../config/config.php';
+
+$db = new \Core\Database\PDO_Connection($config['db']);
+$pdo = $db->getConnection();
+$columns =
+    "ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+    Prename VARCHAR( 50 ) NOT NULL, 
+    Name VARCHAR( 250 ) NOT NULL,
+    StreetA VARCHAR( 150 ) NOT NULL,
+    StreetB VARCHAR( 150 ) NOT NULL, 
+    StreetC VARCHAR( 150 ) NOT NULL, 
+    StreetE VARCHAR( 150 ) NOT NULL, 
+    County VARCHAR( 100 ) NOT NULL, 
+    Postcode VARCHAR( 50 ) NOT NULL, 
+    Country VARCHAR( 50 ) NOT NULL"
+;
+
+var $test = Schema::table('test', function($table){
+    $table->increments('ID', 11),
+    $table->string('Prename', 50);
+    $table->string('Name', 250);
+    $table->string('StreetC', 250);
+    $table->string('StreetA', 250);
+    $table->string('StreetA', 250);
+    $table->string('StreetA', 250);
+});
+
+$test->create();
+
+$table = 'test';
+$createTable = $pdo->prepare("CREATE TABLE IF NOT EXISTS $table ($columns)");
+$createTable->execute();
+// $createTable->fetchAll();
+die();
 
 $router = new \Core\Router;
 
@@ -24,7 +70,7 @@ $db = new \Core\Database\Connection($config['db']);
 //     $table->string('title');
 // });
 use \Core\Models\User;
-$user = new User;;
+$user = new User;
 
 $router
     ->get('/', function($req, $res) use ($user){
@@ -72,4 +118,3 @@ $router
     });
 
 $router->resolve();
-
