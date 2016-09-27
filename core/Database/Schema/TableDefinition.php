@@ -3,7 +3,6 @@
 namespace Core\Database\Schema;
 
 use Core\Database\Schema\Table\Column as Column;
-
 class TableDefinition {
 
     // function __construct($name, $schema)
@@ -12,14 +11,14 @@ class TableDefinition {
     //     $this->schema = $schema;
     // }
 
-    private $fields = [];
+    private $columns = [];
 
 
-    public function boolean($name, ){
+    public function boolean(){
         
     }
     public function integer(){
-
+        return new Column()
     }
     public function decimal(){
 

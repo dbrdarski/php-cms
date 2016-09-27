@@ -10,7 +10,7 @@ class Column {
     //     $this->schema = $schema;
     // }
 
-    private $fields = [];
+    private $field = [];
     public function nullable(){
 
     }

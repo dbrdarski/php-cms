@@ -30,15 +30,15 @@ $columns =
     Postcode VARCHAR( 50 ) NOT NULL, 
     Country VARCHAR( 50 ) NOT NULL"
 ;
+use \Core\Database\Schema\Blueprint as Schema;
 
-var $test = Schema::table('test', function($table){
-    $table->increments('ID', 11),
+$test = Schema::table('test', function($table){
+    $table->increments('ID', 11);       
     $table->string('Prename', 50);
     $table->string('Name', 250);
+    $table->string('StreetA', 250);
+    $table->string('StreetB', 250);
     $table->string('StreetC', 250);
-    $table->string('StreetA', 250);
-    $table->string('StreetA', 250);
-    $table->string('StreetA', 250);
 });
 
 $test->create();
